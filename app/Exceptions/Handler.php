@@ -60,7 +60,7 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof ModelNotFoundException) {
             $modelName = strtolower(class_basename($exception->getModel()));
-            return $this->errorResponse($exception->getMessage(), 404);
+            return $this->errorResponse("The {$modelName} you are looking for, does not exist.", 404);
         }
         if ($exception instanceof AuthenticationException) {
             return $this->errorResponse('You are not authenticated',401);
