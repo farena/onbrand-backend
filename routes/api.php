@@ -21,6 +21,8 @@ Route::middleware('auth:api')->group(function() {
     Route::put('products/{product}','ProductController@update')->middleware(['role:submitter']);
     Route::delete('products/{product}','ProductController@destroy')->middleware(['role:submitter']);
 
+    Route::put('products/{product}/approve','ProductController@approve')->middleware(['role:approver']);
+
 });
 
 Route::post('login','AuthController@login');

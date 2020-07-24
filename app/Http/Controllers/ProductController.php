@@ -112,4 +112,21 @@ class ProductController extends Controller
         $product->delete();
         return $this->showOne($product);
     }
+
+    /**
+     * Approve the specified product
+     *
+     * @param  \App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function approve(Product $product)
+    {
+        if($product->is_approved)
+            return $this->errorResponse('The product is already approved', 412);
+
+        $product->is_approved = true;
+        $product->save();
+
+        return $this->showOne($product);
+    }
 }
