@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -15,7 +16,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return $this->showAll(Product::all());
+        // If the user is a Client we get only the approved products.
+        if (strtolower(Auth::user()->role->name) == 'client') 
+            $products = Product::where('is_approved', true)->get();
+        else
+            $products = Product::all();
+
+
+        return $this->showAll($products);
     }
 
     /**

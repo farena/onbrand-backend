@@ -15,7 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->group(function() {
-    Route::resource('products', 'ProductController')->only(['index','show','store','update','destroy']);
+
+    Route::get('products','ProductController@index');
+    Route::post('products','ProductController@store')->middleware(['role:submitter']);
+    Route::put('products/{product}','ProductController@update')->middleware(['role:submitter']);
+    Route::delete('products/{product}','ProductController@destroy')->middleware(['role:submitter']);
+
 });
 
 Route::post('login','AuthController@login');
