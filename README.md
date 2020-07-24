@@ -5,7 +5,7 @@
     // Clone the repository
     git clone git@github.com:farena/onbrand-backend.git
     // Copy the file .env.example to .env
-    cd onbrand-backend.git
+    cd onbrand-backend
     cp .env.example .env
 
     // Edit the .env file to configure the Database
